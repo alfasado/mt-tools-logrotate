@@ -1,0 +1,51 @@
+#!/usr/bin/perl -w
+
+package MT::Tool::Logrotate;
+
+use strict;
+use lib  qw( extlib lib );
+use base qw( MT::Tool );
+
+sub usage {}
+
+sub help {
+    return q {
+        Logrotate MT's System Log.
+
+            Getting Started:
+                Confirm a directory called "powercms_files" was created under
+                the MT root directory ( MT_HOME/powercms_files ),
+                and was granted a writable permissions.
+
+            Directives in mt-config.cgi:
+                PowerCMSFilesDir /path/to/powercms_files
+                # Specify the path of "powercms_files"
+                # directory (include logrotate directory) anyware.
+
+            Plugin Settings:
+                Compress(Logfile compress to zip) :
+                    Default value is 0 (require Archive::Zip)
+                Log to csv older than(day(s)) :
+                    Default value is 7
+                Log age :
+                    Default value is 5
+
+            Execute from the command line.:
+                cd /path/to/mt; perl ./tools/mt-logrotate
+
+            Executing from Cron(Execute Logrotate once a day(at 2:00 am)):
+                0 2 * * * cd /path/to/mt; perl ./tools/mt-logrotate
+
+    };
+}
+
+sub main {
+    my $class = shift;
+    my ( $verbose ) = $class->SUPER::main( @_ );
+    MT->run_callbacks( 'do_logrotate' );
+    1;
+}
+
+__PACKAGE__->main() unless caller;
+
+1;

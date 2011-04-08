@@ -1,0 +1,23 @@
+<mtapp:setting
+    id="compress"
+    label="<__trans phrase="Compress">"
+    hint=""
+    show_hint="0">
+    <label><input type="checkbox" name="compress" id="compress" value="1" <mt:if name="compress">checked="checked"</mt:if> />
+    <__trans phrase="Logfile compress to zip"></label>
+    <input type="hidden" name="compress" value="0" />
+</mtapp:setting>
+<mtapp:setting
+    id="days_ago"
+    label="<__trans phrase="Log to csv older than(day(s))">"
+    hint=""
+    show_hint="0">
+    <input type="text" name="days_ago" id="days_ago" value="<mt:var name="days_ago" escape="html">" />
+</mtapp:setting>
+<mtapp:setting
+    id="age"
+    label="<__trans phrase="Log age">"
+    hint=""
+    show_hint="0">
+    <input type="text" name="age" id="age" value="<mt:var name="age" escape="html">" />
+</mtapp:setting>
