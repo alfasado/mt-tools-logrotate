@@ -22,10 +22,10 @@ sub _logrotate {
     $now = ts2epoch( undef, $now );
     $sec = $now - $sec;
     my $ts = epoch2ts( undef, $sec );
-    my @logs = MT->model( 'log' )->load( undef, {
-                                         sort    => 'created_on',
-                                         start_val => $ts,
-                                         direction => 'descend', } );
+    my @logs = MT->model( 'log' )->load( { class => '*' }, {
+                                           sort => 'created_on',
+                                           start_val => $ts,
+                                           direction => 'descend', } );
     if (! scalar @logs ) {
         return;
     }
